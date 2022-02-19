@@ -1,0 +1,76 @@
+
+geometrydash.png
+size: 1939, 753
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+background_gd
+  rotate: false
+  xy: 2, 2
+  size: 1533, 749
+  orig: 1533, 749
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 1537, 98
+  size: 70, 45
+  orig: 70, 45
+  offset: 0, 0
+  index: -1
+cube2
+  rotate: false
+  xy: 1537, 145
+  size: 80, 82
+  orig: 80, 82
+  offset: 0, 0
+  index: -1
+inicio_screen
+  rotate: false
+  xy: 1537, 571
+  size: 360, 180
+  orig: 360, 180
+  offset: 0, 0
+  index: -1
+obs1
+  rotate: false
+  xy: 1619, 225
+  size: 80, 82
+  orig: 80, 82
+  offset: 0, 0
+  index: -1
+obs2
+  rotate: false
+  xy: 1619, 309
+  size: 81, 160
+  orig: 81, 160
+  offset: 0, 0
+  index: -1
+obs3
+  rotate: false
+  xy: 1537, 229
+  size: 80, 240
+  orig: 80, 240
+  offset: 0, 0
+  index: -1
+obs_bloque
+  rotate: false
+  xy: 1537, 471
+  size: 400, 98
+  orig: 400, 98
+  offset: 0, 0
+  index: -1
+play_inicio
+  rotate: false
+  xy: 1702, 356
+  size: 78, 71
+  orig: 78, 71
+  offset: 0, 0
+  index: -1
+suelo_trampa
+  rotate: false
+  xy: 1702, 429
+  size: 126, 40
+  orig: 126, 40
+  offset: 0, 0
+  index: -1
