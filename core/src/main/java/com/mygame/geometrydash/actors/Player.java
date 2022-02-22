@@ -18,7 +18,7 @@ public class Player extends Actor{
 
     public static final int STATE_NORMAL = 0;
     public static final int STATE_DEAD = 1;
-    private static final float JUMP_SPEED = 3.8f;
+    private static final float JUMP_SPEED = 3.9f;
 
     public int state;
 

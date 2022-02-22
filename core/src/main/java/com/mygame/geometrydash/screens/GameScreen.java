@@ -50,7 +50,7 @@ public class GameScreen extends BaseScreen {
 
     public GameScreen(MainGame mainGame) {
         super(mainGame);
-        this.world = new World(new Vector2(0, -11), true);
+        this.world = new World(new Vector2(0, -12), true);
         FitViewport fitViewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT);
         this.stage = new Stage(fitViewport);
 
@@ -72,6 +72,9 @@ public class GameScreen extends BaseScreen {
         addObs2();
         addObs3();
         addBloque();
+        addObs1(this.bloque.getX());
+        addObs2(this.obs1.getX());
+        addBloque(this.obs2.getX());
         this.music_bg.setLooping(true);
         this.music_bg.play();
     }
@@ -129,12 +132,36 @@ public class GameScreen extends BaseScreen {
        this.stage.addActor(this.obs1);
 
     }
+    public void addObs1(float x){
+        TextureRegion obs = mainGame.assetManagment.getObs1();
+        this.obs1 = new Obstaculo(this.world,obs,new Vector2(x+14.5f,ALTURA_OBS));
+        this.arrayObs1.add(this.obs1);
+        this.stage.addActor(this.obs1);
+       // addObs1(this.obs1.getX()+2f);
+
+    }
 
 
     public void addObs2(){
         TextureRegion obs2 = mainGame.assetManagment.getObs2();
         this.obs2  = new Obstaculo2(this.world,obs2,new Vector2(this.obs1.getX()+7.5f,ALTURA_OBS+.25f));
         this.stage.addActor(this.obs2);
+    }
+
+    public void addObs2(float x){
+        TextureRegion obs = mainGame.assetManagment.getObs1();
+        this.obs1 = new Obstaculo(this.world,obs,new Vector2(x+16f,ALTURA_OBS));
+        this.arrayObs1.add(this.obs1);
+        this.stage.addActor(this.obs1);
+        // addObs1(this.obs1.getX()+2f);
+
+    }
+    public void addBloque(float x){
+        TextureRegion bloque = mainGame.assetManagment.getBloque();
+        this.bloque = new ObstaculoBloque(this.world,bloque,new Vector2(x+19f,ALTURA_OBS+.05f));
+        this.stage.addActor(this.bloque);
+        // addObs1(this.obs1.getX()+2f);
+
     }
 
     public void addObs3(){
