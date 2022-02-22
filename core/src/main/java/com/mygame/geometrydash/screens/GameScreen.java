@@ -1,19 +1,25 @@
 package com.mygame.geometrydash.screens;
-import static com.mygame.geometrydash.extra.Utils.WIDTH_SCREEN;
+import static com.mygame.geometrydash.actors.Obstaculo.OBS_HEIGHT;
+import static com.mygame.geometrydash.actors.Obstaculo.OBS_WIDTH;
 import static com.mygame.geometrydash.extra.Utils.WORLD_HEIGHT;
 import static com.mygame.geometrydash.extra.Utils.WORLD_WIDTH;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygame.geometrydash.MainGame;
 import com.mygame.geometrydash.actors.Obstaculo;
@@ -33,6 +39,11 @@ public class GameScreen extends BaseScreen {
     private Obstaculo3 obs3;
     private ObstaculoBloque bloque;
     private final float ALTURA_OBS =1.65f;
+    private Music music_bg;
+    private final float SPAWN_TIME = 3.8f;
+    private float time;
+
+    private Array<Obstaculo> arrayObs1;
 
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera ortCamera;
@@ -43,6 +54,9 @@ public class GameScreen extends BaseScreen {
         FitViewport fitViewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT);
         this.stage = new Stage(fitViewport);
 
+        this.arrayObs1 = new Array<>();
+        this.time = 0f;
+        this.music_bg = this.mainGame.assetManagment.getBGMUSIC();
         this.ortCamera = (OrthographicCamera) this.stage.getCamera();
         this.debugRenderer = new Box2DDebugRenderer();
 
@@ -58,7 +72,8 @@ public class GameScreen extends BaseScreen {
         addObs2();
         addObs3();
         addBloque();
-
+        this.music_bg.setLooping(true);
+        this.music_bg.play();
     }
 
     private void addFirstScreen() {
@@ -107,32 +122,56 @@ public class GameScreen extends BaseScreen {
         this.stage.addActor(this.player);
     }
 
-    public void addObs1(){
-        TextureRegion obs1 = mainGame.assetManagment.getObs1();
-        this.obs1 = new Obstaculo(this.world,obs1,new Vector2(4f,ALTURA_OBS));
-        this.stage.addActor(this.obs1);
+   public void addObs1(){
+       TextureRegion obs = mainGame.assetManagment.getObs1();
+       this.obs1 = new Obstaculo(this.world,obs,new Vector2(6.5f,ALTURA_OBS));
+       this.arrayObs1.add(this.obs1);
+       this.stage.addActor(this.obs1);
+
     }
+
 
     public void addObs2(){
         TextureRegion obs2 = mainGame.assetManagment.getObs2();
-        this.obs2  = new Obstaculo2(this.world,obs2,new Vector2(this.obs1.getX()+5f,ALTURA_OBS+.25f));
+        this.obs2  = new Obstaculo2(this.world,obs2,new Vector2(this.obs1.getX()+7.5f,ALTURA_OBS+.25f));
         this.stage.addActor(this.obs2);
     }
 
     public void addObs3(){
         TextureRegion obs3 = mainGame.assetManagment.getObs3();
-        this.obs3 = new Obstaculo3(this.world,obs3,new Vector2(this.obs2.getX()+6f,ALTURA_OBS+.5f));
+        this.obs3 = new Obstaculo3(this.world,obs3,new Vector2(this.obs2.getX()+8.5f,ALTURA_OBS+.5f));
         this.stage.addActor(this.obs3);
     }
     public void addBloque(){
         TextureRegion bloque = mainGame.assetManagment.getBloque();
-        this.bloque = new ObstaculoBloque(this.world,bloque,new Vector2(this.obs3.getX()+10f,ALTURA_OBS+.05f));
+        this.bloque = new ObstaculoBloque(this.world,bloque,new Vector2(this.obs3.getX()+11f,ALTURA_OBS+.05f));
         this.stage.addActor(this.bloque);
     }
 
 
+
+    private void addObstacules(float delta) {
+        float x =  6f + (MathUtils.random() * 2f +2f);
+
+        if(player.state == Player.STATE_NORMAL){
+            this.time += delta;
+            if(this.time >= SPAWN_TIME){
+                this.time -= delta;
+                TextureRegion obs = mainGame.assetManagment.getObs1();
+                Obstaculo obs1 = new Obstaculo(this.world,obs,new Vector2(x,ALTURA_OBS));
+                this.arrayObs1.add(obs1);
+                this.stage.addActor(obs1);
+
+            }
+        }
+    }
+
+
+
     @Override
     public void render(float delta) {
+        //addObstacules(delta);
+        this.stage.getBatch().setProjectionMatrix(ortCamera.combined);
         this.stage.act();
         this.world.step(delta, 6, 2);
         this.stage.draw();
@@ -140,11 +179,12 @@ public class GameScreen extends BaseScreen {
         this.debugRenderer.render(this.world, this.ortCamera.combined);
     }
 
+
     @Override
     public void hide() {
         this.player.detach();
         this.player.remove();
-
+        this.music_bg.stop();
 
 
     }

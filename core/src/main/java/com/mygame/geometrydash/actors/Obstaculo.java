@@ -13,10 +13,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Obstaculo  extends Actor {
-    private static final float OBS_WIDTH = .5f;
-    private static final float OBS_HEIGHT = .5f;
+    public static final float OBS_WIDTH = .5f;
+    public static final float OBS_HEIGHT = .5f;
     private static final float SPACE_BETWEEN_PIPES = 2f;
-    public static final float SPEED = -2f;
+    public static final float SPEED = -2.2f;
 
     private TextureRegion obstaculo;
     private Body bodyObs;
@@ -47,6 +47,7 @@ public class Obstaculo  extends Actor {
         PolygonShape box = new PolygonShape();
         box.setAsBox(OBS_WIDTH/2,OBS_HEIGHT/2);
         this.fixtureObs = bodyObs.createFixture(box,9);
+        this.fixtureObs.setFriction(10f);
 
     }
 

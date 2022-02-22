@@ -16,11 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Player extends Actor{
 
-    private static final int STATE_NORMAL = 0;
-    private static final int STATE_DEAD = 1;
+    public static final int STATE_NORMAL = 0;
+    public static final int STATE_DEAD = 1;
     private static final float JUMP_SPEED = 3.8f;
 
-    private int state;
+    public int state;
 
     private TextureRegion player;
     private boolean jumping, alive;
@@ -56,6 +56,7 @@ public class Player extends Actor{
         this.body.setFixedRotation(true);
         this.body.setUserData(USER_PLAYER);
         this.body.setBullet(true);
+        this.fixture.setFriction(0f);
         shape.dispose();
 
     }

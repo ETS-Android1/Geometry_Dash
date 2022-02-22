@@ -20,6 +20,7 @@ public class Utils {
     public static final String OBSTACULO_BLOQUE = "obs_bloque";
     public static final String PANTALLA_INICIO = "inicio_screen";
     public static final String PLAY_INICIO = "play_inicio";
+    public static final String BGMUSIC = "bgmusic.mp3";
 
 
 
