@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Obstaculo2 extends Actor{
+public class Obstaculo2 extends Actor {
 
     private static final float OBS_WIDTH = .5f;
     private static final float OBS_HEIGHT = 1f;
@@ -65,5 +65,19 @@ public class Obstaculo2 extends Actor{
         bodyObs.destroyFixture(fixtureObs);
         world.destroyBody(bodyObs);
 
+    }
+
+    public void stopObs(){
+        this.bodyObs.setLinearVelocity(0,0);
+
+    }
+
+
+    public float getPosition(){
+        return this.bodyObs.getPosition().x;
+    }
+
+    public boolean isOutOfScreen(){
+        return this.bodyObs.getPosition().x <= -.8f;
     }
 }

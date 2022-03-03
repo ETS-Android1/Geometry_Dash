@@ -1,0 +1,139 @@
+
+geometry_atlas.png
+size: 1582, 1280
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+background_gd
+  rotate: false
+  xy: 2, 529
+  size: 1533, 749
+  orig: 1533, 749
+  offset: 0, 0
+  index: -1
+btnStart
+  rotate: false
+  xy: 844, 12
+  size: 200, 92
+  orig: 200, 92
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 1276, 59
+  size: 70, 45
+  orig: 70, 45
+  offset: 0, 0
+  index: -1
+coin2
+  rotate: false
+  xy: 1254, 9
+  size: 75, 48
+  orig: 75, 48
+  offset: 0, 0
+  index: -1
+coin3
+  rotate: false
+  xy: 1174, 19
+  size: 78, 50
+  orig: 78, 50
+  offset: 0, 0
+  index: -1
+cube2
+  rotate: false
+  xy: 1458, 445
+  size: 80, 82
+  orig: 80, 82
+  offset: 0, 0
+  index: -1
+gameover
+  rotate: false
+  xy: 1246, 247
+  size: 250, 139
+  orig: 250, 139
+  offset: 0, 0
+  index: -1
+gameover
+  rotate: false
+  xy: 844, 106
+  size: 250, 139
+  orig: 250, 139
+  offset: 0, 0
+  index: -1
+gameover
+  rotate: false
+  xy: 1096, 106
+  size: 250, 139
+  orig: 250, 139
+  offset: 0, 0
+  index: -1
+gameover
+  rotate: false
+  xy: 1206, 388
+  size: 250, 139
+  orig: 250, 139
+  offset: 0, 0
+  index: -1
+gameover_background
+  rotate: false
+  xy: 2, 2
+  size: 840, 525
+  orig: 840, 525
+  offset: 0, 0
+  index: -1
+inicio_screen
+  rotate: false
+  xy: 844, 347
+  size: 360, 180
+  orig: 360, 180
+  offset: 0, 0
+  index: -1
+obs1
+  rotate: false
+  xy: 1348, 53
+  size: 80, 82
+  orig: 80, 82
+  offset: 0, 0
+  index: -1
+obs2
+  rotate: false
+  xy: 1498, 283
+  size: 81, 160
+  orig: 81, 160
+  offset: 0, 0
+  index: -1
+obs3
+  rotate: false
+  xy: 1500, 41
+  size: 80, 240
+  orig: 80, 240
+  offset: 0, 0
+  index: -1
+obs3blocs
+  rotate: false
+  xy: 1046, 71
+  size: 228, 33
+  orig: 228, 33
+  offset: 0, 0
+  index: -1
+obs_bloque
+  rotate: false
+  xy: 844, 247
+  size: 400, 98
+  orig: 400, 98
+  offset: 0, 0
+  index: -1
+pincho
+  rotate: false
+  xy: 1348, 137
+  size: 150, 108
+  orig: 150, 108
+  offset: 0, 0
+  index: -1
+suelo_trampa
+  rotate: false
+  xy: 1046, 29
+  size: 126, 40
+  orig: 126, 40
+  offset: 0, 0
+  index: -1

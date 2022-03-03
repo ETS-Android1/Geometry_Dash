@@ -1,8 +1,6 @@
 package com.mygame.geometrydash.actors;
 
-
-import static com.mygame.geometrydash.extra.Utils.USER_OBS1;
-import static com.mygame.geometrydash.extra.Utils.USER_OBS3;
+import static com.mygame.geometrydash.extra.Utils.USER_BLOQUE;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,17 +12,17 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Obstaculo3 extends Actor{
+public class Obstaculo3Bloques extends Actor{
 
-    private static final float OBS_WIDTH = .5f;
-    private static final float OBS_HEIGHT = 1.5f;
+    private static final float OBS_WIDTH = 1.5f;
+    private static final float OBS_HEIGHT = .2f;
     private TextureRegion obstaculo;
     private Body bodyObs;
     private Fixture fixtureObs;
 
     private World world;
 
-    public Obstaculo3(World world, TextureRegion obstaculo, Vector2 position) {
+    public Obstaculo3Bloques(World world, TextureRegion obstaculo, Vector2 position) {
         this.obstaculo = obstaculo;
         this.world = world;
         createBodyObst(position);
@@ -38,7 +36,7 @@ public class Obstaculo3 extends Actor{
         def.position.set(position);
         def.type = BodyDef.BodyType.KinematicBody;
         bodyObs = world.createBody(def);
-        bodyObs.setUserData(USER_OBS3);
+        bodyObs.setUserData(USER_BLOQUE);
         bodyObs.setLinearVelocity(Obstaculo.SPEED,0);
     }
 
@@ -67,18 +65,18 @@ public class Obstaculo3 extends Actor{
         world.destroyBody(bodyObs);
 
     }
+
     public void stopObs(){
         this.bodyObs.setLinearVelocity(0,0);
 
     }
-
 
     public float getPosition(){
         return this.bodyObs.getPosition().x;
     }
 
     public boolean isOutOfScreen(){
-        return this.bodyObs.getPosition().x <= -.8f;
+        return this.bodyObs.getPosition().x <= -1.6f;
     }
 }
 

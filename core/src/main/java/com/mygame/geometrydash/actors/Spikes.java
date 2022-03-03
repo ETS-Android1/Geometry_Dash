@@ -1,8 +1,6 @@
 package com.mygame.geometrydash.actors;
 
-
-import static com.mygame.geometrydash.extra.Utils.USER_OBS1;
-import static com.mygame.geometrydash.extra.Utils.USER_OBS3;
+import static com.mygame.geometrydash.extra.Utils.USER_PINCHO;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,41 +12,49 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Obstaculo3 extends Actor{
+public class Spikes  extends Actor {
 
-    private static final float OBS_WIDTH = .5f;
-    private static final float OBS_HEIGHT = 1.5f;
+
+
     private TextureRegion obstaculo;
     private Body bodyObs;
     private Fixture fixtureObs;
-
     private World world;
 
-    public Obstaculo3(World world, TextureRegion obstaculo, Vector2 position) {
+    public Spikes(World world, TextureRegion obstaculo,float x, float y) {
         this.obstaculo = obstaculo;
         this.world = world;
-        createBodyObst(position);
-        createFixtureObs();
+        createBodyObst(x,y);
+
 
     }
 
-
-    private void createBodyObst(Vector2 position) {
+    private void createBodyObst(float x, float y) {
         BodyDef def = new BodyDef();
-        def.position.set(position);
+        def.position.set(new Vector2(x,y-.04f));
         def.type = BodyDef.BodyType.KinematicBody;
         bodyObs = world.createBody(def);
-        bodyObs.setUserData(USER_OBS3);
+
+
         bodyObs.setLinearVelocity(Obstaculo.SPEED,0);
-    }
 
 
-    private void createFixtureObs() {
         PolygonShape box = new PolygonShape();
-        box.setAsBox(OBS_WIDTH/2,OBS_HEIGHT/2);
-        this.fixtureObs = bodyObs.createFixture(box,9);
+        Vector2[] vertices = new Vector2[3];
+        vertices[0] = new Vector2(-0.16f,-0.16f);
+        vertices[1] = new Vector2(0.16f,-0.16f);
+        vertices[2] = new Vector2(0,0.12f);
+        box.set(vertices);
 
+        this.fixtureObs = bodyObs.createFixture(box,9);
+        this.fixtureObs.setUserData(USER_PINCHO);
+        box.dispose();
+
+        setPosition(x, y);
+
+        setSize(.58f,.6f);
     }
+
 
     @Override
     public void act(float delta) {
@@ -57,28 +63,25 @@ public class Obstaculo3 extends Actor{
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition(bodyObs.getPosition().x, bodyObs.getPosition().y);
-        batch.draw(this.obstaculo,bodyObs.getPosition().x - OBS_WIDTH/2,bodyObs.getPosition().y - OBS_HEIGHT/2
-                ,OBS_WIDTH,OBS_HEIGHT);
-
+        setPosition(bodyObs.getPosition().x-.28f, bodyObs.getPosition().y-.3f);
+        batch.draw(this.obstaculo,getX(),getY(),getWidth(),getHeight()-.06f );
     }
     public void detach(){
         bodyObs.destroyFixture(fixtureObs);
         world.destroyBody(bodyObs);
 
     }
-    public void stopObs(){
-        this.bodyObs.setLinearVelocity(0,0);
-
-    }
-
 
     public float getPosition(){
         return this.bodyObs.getPosition().x;
+    }
+
+    public void stopObs(){
+        this.bodyObs.setLinearVelocity(0,0);
+
     }
 
     public boolean isOutOfScreen(){
         return this.bodyObs.getPosition().x <= -.8f;
     }
 }
-

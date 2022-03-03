@@ -18,45 +18,41 @@ public class Player extends Actor{
 
     public static final int STATE_NORMAL = 0;
     public static final int STATE_DEAD = 1;
-    private static final float JUMP_SPEED = 3.9f;
+    public static  float JUMP_SPEED = 3.9f;
 
     public int state;
 
     private TextureRegion player;
-    private boolean jumping, alive;
     private Vector2 position;
     private World world;
     private Body body;
     private Fixture fixture;
-    private float stateTime;
 
     public Player(World world, TextureRegion player, Vector2 position){
         this.world = world;
         this.player = player;
         this.position = new Vector2(position);
         state = STATE_NORMAL;
-        stateTime = 0f;
+
         createPlayer();
     }
 
     private void createPlayer() {
-
         BodyDef bd = new BodyDef();
-
         bd.position.set(position);
         bd.type = BodyDef.BodyType.DynamicBody;
         this.body = this.world.createBody(bd);
+        //this.body.setBullet(true);
 
+        this.body.setFixedRotation(true); //para que no pueda girar el cuerpo fisico y se quede estatico
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(0.2f,0.2f);
 
         this.fixture = this.body.createFixture(shape,9);
+        this.fixture.setUserData(USER_PLAYER);
 
-        this.body.setFixedRotation(true);
-        this.body.setUserData(USER_PLAYER);
-        this.body.setBullet(true);
-        this.fixture.setFriction(0f);
+        this.fixture.setFriction(0f); //para que cuando salte encima de un obstaculo no frene por la friccion
         shape.dispose();
 
     }
@@ -64,8 +60,9 @@ public class Player extends Actor{
     @Override
     public void act(float delta) {
         boolean jump = Gdx.input.justTouched();
-        if(jump && state == STATE_NORMAL){
-           this.body.setLinearVelocity(0,JUMP_SPEED);
+
+        if (jump && state == STATE_NORMAL) {
+            this.body.setLinearVelocity(0, JUMP_SPEED);
         }
 
     }
@@ -75,8 +72,6 @@ public class Player extends Actor{
         setPosition(body.getPosition().x-0.2f, body.getPosition().y-0.2f);
         batch.draw(this.player,getX(),getY(),.4f,.4f);
 
-
-        stateTime += Gdx.graphics.getDeltaTime();
     }
 
     public void detach(){
@@ -84,10 +79,17 @@ public class Player extends Actor{
         this.world.destroyBody(this.body);
     }
 
-    /*public boolean canJump() {
-        if (this.body.getPosition().y <= 0) {
-            return false;
-        }
-        return true;
-    }*/
+    public void hurt(){
+        this.state = STATE_DEAD;
+
+    }
+
+    //public boolean velocity(){
+       // return  this.body.getLinearVelocity().y == 0;
+   // }
+
+    public boolean isOutOfScreen(){
+        return this.body.getPosition().x <=-.6f;
+    }
+
 }

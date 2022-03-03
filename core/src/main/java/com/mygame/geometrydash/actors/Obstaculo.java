@@ -16,7 +16,7 @@ public class Obstaculo  extends Actor {
     public static final float OBS_WIDTH = .5f;
     public static final float OBS_HEIGHT = .5f;
     private static final float SPACE_BETWEEN_PIPES = 2f;
-    public static final float SPEED = -2.2f;
+    public static  float SPEED = -2.2f;
 
     private TextureRegion obstaculo;
     private Body bodyObs;
@@ -40,6 +40,7 @@ public class Obstaculo  extends Actor {
         bodyObs = world.createBody(def);
         bodyObs.setUserData(USER_OBS1);
         bodyObs.setLinearVelocity(SPEED,0);
+
     }
 
 
@@ -48,6 +49,8 @@ public class Obstaculo  extends Actor {
         box.setAsBox(OBS_WIDTH/2,OBS_HEIGHT/2);
         this.fixtureObs = bodyObs.createFixture(box,9);
         this.fixtureObs.setFriction(10f);
+        box.dispose();
+
 
     }
 
@@ -63,9 +66,22 @@ public class Obstaculo  extends Actor {
         ,OBS_WIDTH,OBS_HEIGHT);
 
     }
+
     public void detach(){
         bodyObs.destroyFixture(fixtureObs);
         world.destroyBody(bodyObs);
 
+    }
+    public void stopObs(){
+        bodyObs.setLinearVelocity(0,0);
+
+    }
+
+    public float getPosition(){
+        return this.bodyObs.getPosition().x;
+    }
+
+    public boolean isOutOfScreen(){
+        return this.bodyObs.getPosition().x <= -.8f;
     }
 }

@@ -64,5 +64,18 @@ public class ObstaculoBloque extends Actor{
         world.destroyBody(bodyObs);
 
     }
+
+    public void stopObs(){
+        this.bodyObs.setLinearVelocity(0,0);
+
+    }
+
+    public float getPosition(){
+        return this.bodyObs.getPosition().x;
+    }
+
+    public boolean isOutOfScreen(){
+        return this.bodyObs.getPosition().x <= -1.6f;
+    }
 }
 

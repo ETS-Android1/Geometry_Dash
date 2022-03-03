@@ -1,30 +1,24 @@
 package com.mygame.geometrydash.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygame.geometrydash.MainGame;
 
-public class BaseScreen implements Screen {
+public class BaseScreen  implements Screen {
 
-    protected MainGame mainGame;
+    protected MainGame main;
 
     public BaseScreen(MainGame mainGame) {
-        this.mainGame = mainGame;
+        this.main = mainGame;
+
 
     }
 
     @Override
     public void show() {
-
     }
 
     @Override
     public void render(float delta) {
-
 
     }
 
@@ -53,4 +47,6 @@ public class BaseScreen implements Screen {
     public void dispose() {
 
     }
+
+
 }
