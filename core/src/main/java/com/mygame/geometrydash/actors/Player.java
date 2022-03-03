@@ -1,6 +1,5 @@
 package com.mygame.geometrydash.actors;
 
-import static com.mygame.geometrydash.extra.Utils.USER_PLAYER;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -13,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygame.geometrydash.extra.Utils;
 
 public class Player extends Actor{
 
@@ -50,7 +50,7 @@ public class Player extends Actor{
         shape.setAsBox(0.2f,0.2f);
 
         this.fixture = this.body.createFixture(shape,9);
-        this.fixture.setUserData(USER_PLAYER);
+        this.fixture.setUserData(Utils.USER_PLAYER);
 
         this.fixture.setFriction(0f); //para que cuando salte encima de un obstaculo no frene por la friccion
         shape.dispose();

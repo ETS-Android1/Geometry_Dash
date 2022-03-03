@@ -78,7 +78,7 @@ public class HomeScreen extends BaseScreen{
                                     background.remove();
                                     geometrydash_home.remove();
                                     button_play.remove();
-                                    main.setScreen(main.gameScreen);
+                                    main.setScreen(new GameScreen(main));
                                 }
                             })
 

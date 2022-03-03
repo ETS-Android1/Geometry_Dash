@@ -73,7 +73,7 @@ public class GameOverScreen extends BaseScreen {
         TextureRegion frame = animation.getKeyFrame(deltaTime,true);
 
         //drawBackgorund(delta);
-        spriteBatch.draw(frame,(WIDTH_SCREEN/2.6f),HEIGHT_SCREEN/2.4f,frame.getRegionWidth()/1.2f, frame.getRegionHeight()/1.2f);
+        spriteBatch.draw(frame,(WIDTH_SCREEN/2.6f),HEIGHT_SCREEN/2.4f,frame.getRegionWidth()/1.1f, frame.getRegionHeight()/1.1f);
 
         spriteBatch.end();
 
@@ -86,7 +86,7 @@ public class GameOverScreen extends BaseScreen {
                                 @Override
                                 public void run() {
                                     background.remove();
-                                    main.setScreen(main.homeScreen);
+                                    main.setScreen(new HomeScreen(main));
 
                                 }
                             })

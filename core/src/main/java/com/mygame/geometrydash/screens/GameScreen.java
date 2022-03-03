@@ -35,8 +35,10 @@ import com.mygame.geometrydash.actors.ObstaculoBloque;
 import com.mygame.geometrydash.actors.Player;
 import com.mygame.geometrydash.actors.Spikes;
 
+import controllers.Controller;
 
-public class GameScreen extends BaseScreen implements ContactListener{
+
+public class GameScreen extends BaseScreen implements ContactListener {
     Controller controller = new Controller(main);
     public Stage stage;
     private Image background;
@@ -46,7 +48,7 @@ public class GameScreen extends BaseScreen implements ContactListener{
     public static final float ALTURA_OBS =1.72f;
     public Music music_bg;
     public Sound dead_sound;
-    private final float SPAWN_TIME = 4f;
+    private final float SPAWN_TIME = 15f;
     private float time=0f;
 
     public static  Array<Obstaculo> arrayObs1;
@@ -79,6 +81,7 @@ public class GameScreen extends BaseScreen implements ContactListener{
         arraySpike = new Array<>();
         array3blocs = new Array<>();
 
+
         scoreNum=0;
         this.music_bg = this.main.assetManagment.getBGMUSIC();
         this.dead_sound=this.main.assetManagment.getDeathSound();
@@ -98,7 +101,7 @@ public class GameScreen extends BaseScreen implements ContactListener{
         /*--CREO OBSTACULOS EN EL SHOW PARA QUE EL USUARIO NO TENGA QUE ESPERAR TANTO
          * --TIEMPO PARA QUE APARREZCAN DESDE EL RENDER, PORQUE ALTERO SU VALOR---*/
 
-        controller.addObstaculosShow(this.stage,8.4f);
+        controller.addObstaculosShow(this.stage,this.world,8.4f);
 
         this.music_bg.setLooping(true);
         this.music_bg.play();
@@ -158,7 +161,7 @@ public class GameScreen extends BaseScreen implements ContactListener{
                 this.time += delta;
                 if (this.time >= SPAWN_TIME) {
                     this.time -= SPAWN_TIME;
-                    controller.addObstaculosBucle(this.stage, 12.8f);
+                    controller.addObstaculosBucle(this.stage,this.world, 9.6f);
                     Obstaculo.SPEED -= .12f; //cada "vuelta" aumento la velocidad de los obstáculos
                     scoreNum++; //cada "vuelta" del render aumento la puntuacion
                     int i = 4;
@@ -183,7 +186,6 @@ public class GameScreen extends BaseScreen implements ContactListener{
                     }
 
                 }
-
         }
     }
 
@@ -191,7 +193,8 @@ public class GameScreen extends BaseScreen implements ContactListener{
     @Override
     public void render(float delta) {
 
-        update(delta);
+        //update(delta);
+        addObstaculesRender(delta);
         this.stage.getBatch().setProjectionMatrix(ortCamera.combined);
         this.stage.act();
 
@@ -199,7 +202,7 @@ public class GameScreen extends BaseScreen implements ContactListener{
         this.stage.draw();
         this.ortCamera.update();
 
-        controller.endGame(this.player);
+        controller.endGame(this.player, this.stage);
         //this.debugRenderer.render(this.world, this.ortCamera.combined);
 
         /*METODO PARA ELIMINAR EL FIXTURE Y LE BODY Y NO SE QUEDE EN MEMORA CUANDO SALEN DE LA PANTALLA*/
@@ -223,7 +226,7 @@ public class GameScreen extends BaseScreen implements ContactListener{
 
     private void update(float delta) {
         float dt = 0f;
-        dt+=delta/3.2f;
+        dt+=delta/1.2f;
         addObstaculesRender(dt);
 
     }
@@ -233,6 +236,7 @@ public class GameScreen extends BaseScreen implements ContactListener{
     public void hide() {
         this.player.detach();
         this.player.remove();
+
         this.music_bg.stop();
     }
 
@@ -246,18 +250,17 @@ public class GameScreen extends BaseScreen implements ContactListener{
     public void pause() {
     }
 
-    public boolean areCollider(Contact contact){
-        return (contact.getFixtureA().getUserData() instanceof Player && contact.getFixtureB().getUserData() instanceof Spikes) ||
-                (contact.getFixtureA().getUserData() instanceof Spikes && contact.getFixtureB().getUserData() instanceof Player);
+    public boolean areColider(Contact contact, Object objA, Object objB){
+        return (contact.getFixtureA().getUserData().equals(objA) && contact.getFixtureB().getUserData().equals(objB)) ||
+                (contact.getFixtureA().getUserData().equals(objB) && contact.getFixtureB().getUserData().equals(objA));
     }
 
     @Override
     public void beginContact(Contact contact) {
-        if (areCollider(contact)) {
-            this.dead_sound.play();
-            this.world.dispose();
-            //controller.endGame(this.player);
+        if(areColider(contact, USER_PLAYER, USER_PINCHO)){
+            controller.endGame(this.player,this.stage);
         }
+
     }
 
     @Override
@@ -274,6 +277,4 @@ public class GameScreen extends BaseScreen implements ContactListener{
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
     }
-
-
 }
