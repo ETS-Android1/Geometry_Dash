@@ -3,10 +3,10 @@ package com.mygame.geometrydash.extra;
 
 
 public class Utils {
-    public static final int WIDTH_SCREEN = 920;
+    public static final int WIDTH_SCREEN = 980;
     public static final int HEIGHT_SCREEN = 500;
 
-    public static final float WORLD_WIDTH = 9.2f;
+    public static final float WORLD_WIDTH = 9.8f;
     public static final float WORLD_HEIGHT = 5f;
 
     public static final String ATLAS_MAP = "geometry_atlas.atlas";
