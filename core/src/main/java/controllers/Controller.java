@@ -8,6 +8,10 @@ import static com.mygame.geometrydash.screens.GameScreen.arrayObs1;
 import static com.mygame.geometrydash.screens.GameScreen.arrayObs2;
 import static com.mygame.geometrydash.screens.GameScreen.arrayObs3;
 import static com.mygame.geometrydash.screens.GameScreen.arraySpike;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -26,6 +30,9 @@ import com.mygame.geometrydash.screens.GameScreen;
 
 
 public class Controller extends BaseScreen {
+
+
+    private float deltaTime = 0f;
 
     /*CLASE PARA CONTROLAR LA CREACION DE OBSTACULOS, ELIMINARLOS Y/O PARARLOS CUANDO ACABE EL JUEGO*/
 
@@ -168,7 +175,7 @@ public class Controller extends BaseScreen {
     //se acaba el juego si el personaje sale de la pantalla
     public void endGame(Player player, Stage stage) {
             if(player.isOutOfScreen()){
-                player.hurt();
+
                 main.gameScreen.music_bg.stop(); //paro la musica
 
 
@@ -201,20 +208,24 @@ public class Controller extends BaseScreen {
     public void endGameConctact(Player player, Stage stage) {
             player.hurt();
             main.gameScreen.music_bg.stop();
-            main.gameScreen.dead_sound.play();
+            main.gameScreen.explosion_sound.play();
+            //parp los obstaculos
             stop1();
             stop2();
             stop3();
             stopBloque();
             stopSpike();
             stopBloque3();
+
+
+            //cargo la animiacion de la explosion
+            player.setAnimation(main.assetManagment.getAnimationExplotion());
             stage.addAction(
                     Actions.sequence(
-                            Actions.fadeOut(.4f),
+                            Actions.sequence(Actions.delay(1.5f)),
                             Actions.run(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Actions.delay(.5f);
                                     main.setScreen(main.gameOverScreen);
                                     //lanzo el gameover
                                 }

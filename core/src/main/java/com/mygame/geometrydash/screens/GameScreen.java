@@ -1,4 +1,5 @@
 package com.mygame.geometrydash.screens;
+import static com.mygame.geometrydash.extra.Utils.EXPLOTION;
 import static com.mygame.geometrydash.extra.Utils.HEIGHT_SCREEN;
 
 import static com.mygame.geometrydash.extra.Utils.SUELO;
@@ -9,14 +10,18 @@ import static com.mygame.geometrydash.extra.Utils.WIDTH_SCREEN;
 import static com.mygame.geometrydash.extra.Utils.WORLD_HEIGHT;
 import static com.mygame.geometrydash.extra.Utils.WORLD_WIDTH;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -53,13 +58,14 @@ public class GameScreen extends BaseScreen implements ContactListener {
     public static final float ALTURA_OBS =1.72f;
 
     public Music music_bg; //musica de fondo
-    public Sound dead_sound; //sonido cuando muere
+    public Sound dead_sound; //sonido cuando muere pos salir de la pantalla
+    public Sound explosion_sound; //sonido cuando cuando colisiona
 
     private final float SPAWN_TIME = 19f; //cada cuanto tiempo va a tardar el render en generar obstaculos
 
     private float time=0f;//donde voy a almacenar el tiempo que pase
 
-    //private Box2DDebugRenderer debugRenderer;
+
 
 
     /*ARRAYS DE CADA TIPO DE OBSTACULO PARA MÁS ADELANTE ELIMINARLOS*/
@@ -79,6 +85,11 @@ public class GameScreen extends BaseScreen implements ContactListener {
 
     public static int scoreNum; //variable para puntuacion
 
+
+    Animation<TextureRegion> animation;
+    private SpriteBatch spriteBatch;
+    private float deltaTime=0f;
+
     public GameScreen(MainGame mainGame) {
         super(mainGame);
 
@@ -96,12 +107,14 @@ public class GameScreen extends BaseScreen implements ContactListener {
         arrayBloque = new Array<>();
         arraySpike = new Array<>();
         array3blocs = new Array<>();
-        //this.debugRenderer = new Box2DDebugRenderer();
 
+
+        spriteBatch = new SpriteBatch();
         scoreNum=0;
 
         this.music_bg = this.main.assetManagment.getBGMUSIC();
         this.dead_sound=this.main.assetManagment.getDeathSound();
+        this.explosion_sound=this.main.assetManagment.getExplosionSound();
 
         this.ortCamera = (OrthographicCamera) this.stage.getCamera();
 
@@ -120,6 +133,10 @@ public class GameScreen extends BaseScreen implements ContactListener {
          * --TIEMPO PARA QUE APARREZCAN DESDE EL RENDER, PORQUE ALTERO SU VALOR---*/
 
         controller.addObstaculosShow(this.stage,this.world,9f);
+
+        animation = main.assetManagment.getAnimationExplotion();
+
+        spriteBatch = new SpriteBatch();
 
         this.music_bg.setLooping(true);
         this.music_bg.play();
@@ -213,6 +230,7 @@ public class GameScreen extends BaseScreen implements ContactListener {
 
     @Override
     public void render(float delta) {
+
         //metodo donde voy a crear los obstaculos
         addObstaculesRender(delta);
         this.stage.getBatch().setProjectionMatrix(ortCamera.combined);
@@ -222,11 +240,9 @@ public class GameScreen extends BaseScreen implements ContactListener {
         this.stage.draw();
         this.ortCamera.update();
 
+
         //METODO PARA LANZAR EL GAMEOVERSCREEN SI EL PERSONAJE SALE DE LA PANTALLA
         controller.endGame(this.player, this.stage);
-
-        //this.debugRenderer.render(this.world, this.ortCamera.combined);
-
 
 
         /*METODO PARA ELIMINAR EL FIXTURE Y EL BODY Y NO SE QUEDE EN MEMORA CUANDO SALEN DE LA PANTALLA*/
@@ -278,6 +294,7 @@ public class GameScreen extends BaseScreen implements ContactListener {
     public void beginContact(Contact contact) {
         //cuando el personaje choque con el pincho, lanza el gameover
         if(areColider(contact,USER_PLAYER, USER_PINCHO)){
+
             controller.endGameConctact(this.player,this.stage);
             //si el personaje esta encima de un obstaculo o el suelo, puede saltar
         }else if(areColider(contact,USER_PLAYER,USER_BLOQUE) || areColider(contact,USER_PLAYER,SUELO)){

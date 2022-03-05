@@ -1,146 +1,139 @@
 
 geometry_atlas.png
-size: 1620, 1280
+size: 1764, 1286
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 background_gd
   rotate: false
-  xy: 2, 529
+  xy: 2, 535
   size: 1533, 749
   orig: 1533, 749
   offset: 0, 0
   index: -1
 btnStart
   rotate: false
-  xy: 1071, 12
+  xy: 1537, 588
   size: 200, 92
   orig: 200, 92
   offset: 0, 0
   index: -1
-coin
+explotion
   rotate: false
-  xy: 1537, 559
-  size: 70, 45
-  orig: 70, 45
+  xy: 1537, 682
+  size: 198, 176
+  orig: 198, 176
   offset: 0, 0
   index: -1
-coin2
+explotion
   rotate: false
-  xy: 1537, 606
-  size: 75, 48
-  orig: 75, 48
+  xy: 1537, 860
+  size: 197, 197
+  orig: 197, 197
   offset: 0, 0
   index: -1
-coin3
+explotion
   rotate: false
-  xy: 1537, 656
-  size: 78, 50
-  orig: 78, 50
-  offset: 0, 0
-  index: -1
-cube2
-  rotate: false
-  xy: 1537, 792
-  size: 80, 82
-  orig: 80, 82
+  xy: 1206, 353
+  size: 199, 180
+  orig: 199, 180
   offset: 0, 0
   index: -1
 gameover
   rotate: false
-  xy: 1246, 247
+  xy: 1407, 253
   size: 250, 139
   orig: 250, 139
   offset: 0, 0
   index: -1
 gameover
   rotate: false
-  xy: 1206, 388
+  xy: 1063, 112
   size: 250, 139
   orig: 250, 139
   offset: 0, 0
   index: -1
 gameover
   rotate: false
-  xy: 1323, 106
+  xy: 1315, 112
   size: 250, 139
   orig: 250, 139
   offset: 0, 0
   index: -1
 gameover
   rotate: false
-  xy: 1071, 106
+  xy: 1407, 394
   size: 250, 139
   orig: 250, 139
   offset: 0, 0
   index: -1
 gameover_background
   rotate: false
-  xy: 2, 2
+  xy: 2, 8
   size: 840, 525
   orig: 840, 525
   offset: 0, 0
   index: -1
 inicio_screen
   rotate: false
-  xy: 844, 347
+  xy: 844, 353
   size: 360, 180
   orig: 360, 180
   offset: 0, 0
   index: -1
 obs1
   rotate: false
-  xy: 1537, 708
+  xy: 1246, 269
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
   index: -1
 obs2
   rotate: false
-  xy: 1537, 876
+  xy: 1567, 91
   size: 81, 160
   orig: 81, 160
   offset: 0, 0
   index: -1
 obs3
   rotate: false
-  xy: 1537, 1038
+  xy: 1659, 346
   size: 80, 240
   orig: 80, 240
   offset: 0, 0
   index: -1
 obs3blocs
   rotate: false
-  xy: 1273, 71
+  xy: 1063, 77
   size: 228, 33
   orig: 228, 33
   offset: 0, 0
   index: -1
 obs_bloque
   rotate: false
-  xy: 844, 247
+  xy: 844, 253
   size: 400, 98
   orig: 400, 98
   offset: 0, 0
   index: -1
 pincho
   rotate: false
-  xy: 1458, 419
+  xy: 1293, 2
   size: 150, 108
   orig: 150, 108
   offset: 0, 0
   index: -1
 player
   rotate: false
-  xy: 844, 20
+  xy: 1537, 1059
   size: 225, 225
   orig: 225, 225
   offset: 0, 0
   index: -1
-suelo_trampa
+player_dead1
   rotate: false
-  xy: 1273, 29
-  size: 126, 40
-  orig: 126, 40
+  xy: 844, 34
+  size: 217, 217
+  orig: 217, 217
   offset: 0, 0
   index: -1

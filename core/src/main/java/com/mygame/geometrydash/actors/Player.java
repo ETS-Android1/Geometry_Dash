@@ -2,6 +2,7 @@ package com.mygame.geometrydash.actors;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -12,7 +13,11 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.mygame.geometrydash.extra.Utils;
+
+import java.util.concurrent.TimeUnit;
 
 public class Player extends Actor{
 
@@ -28,12 +33,15 @@ public class Player extends Actor{
     private Body body;
     private Fixture fixture;
     public boolean canJump=false;
+    Animation<TextureRegion> animation;
+    private float stateTime;
 
     public Player(World world, TextureRegion player, Vector2 position){
         this.world = world;
         this.player = player;
         this.position = new Vector2(position);
         state = STATE_NORMAL;
+        stateTime = 0f;
 
         createPlayer();
     }
@@ -48,7 +56,7 @@ public class Player extends Actor{
         this.body.setFixedRotation(true); //para que no pueda girar el cuerpo fisico y se quede estatico
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.25f,0.25f);//el personaje medirá, contando desde la mitad del cuadrado, .2 de alto y ancho
+        shape.setAsBox(0.2f,0.2f);//el personaje medirá, contando desde la mitad del cuadrado, .2 de alto y ancho
 
         this.fixture = this.body.createFixture(shape,9);
         this.fixture.setUserData(Utils.USER_PLAYER); //identificador
@@ -65,13 +73,22 @@ public class Player extends Actor{
         //comprobar si el personaje puede saltar o no (cuando esté en el aire no podrá hacerlo)
         if (jump && canJump && state == STATE_NORMAL) {
             this.body.setLinearVelocity(0, JUMP_SPEED);
+
         }
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition(body.getPosition().x-0.25f, body.getPosition().y-0.25f);
+        setPosition(body.getPosition().x-0.2f, body.getPosition().y-0.2f);
         batch.draw(this.player,getX(),getY(),.42f,.42f);
+
+        if(state == STATE_DEAD){
+            //CUANDO MUERE EL PERSONAJE POR COLISIONAR, MUESTRO UNA ANIMACION
+            stateTime += Gdx.graphics.getDeltaTime();
+            setPosition(body.getPosition().x-0.65f, body.getPosition().y-.35f);
+            batch.draw(this.animation.getKeyFrame(stateTime, true),getX(),getY(),1.2f,1.2f);
+
+        }
 
     }
 
@@ -85,6 +102,13 @@ public class Player extends Actor{
         this.state = STATE_DEAD;
 
     }
+
+    public void setAnimation(Animation<TextureRegion> animation){
+        this.animation = animation;
+
+    }
+
+
 
     //para saber si se ha salido de la pantalla
     public boolean isOutOfScreen(){

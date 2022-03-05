@@ -16,6 +16,7 @@ public class Utils {
     //NOMBRE DE LOS OBSTACULOS EN EL ATLAS, LA MUSICA Y LOS SONIDOS
     public static final String BACKGROUND = "background_gd";
     public static final String PLAYER = "player";
+    public static final String PLAYER_DEAD = "player_dead1";
     public static final String OBSTACULO1 = "obs1";
     public static final String OBSTACULO2 = "obs2";
     public static final String OBSTACULO3 = "obs3";
@@ -27,11 +28,15 @@ public class Utils {
 
     public static final String DEATH_SOUND = "dead.mp3";
     public static final String INICIO_SOUND = "level_inicio.mp3";
+    public static final String EXPLOSION_SOUND = "EXPLOSION.mp3";
     public static final String PINCHO = "pincho";
     public static final String FONT_FNT = "font.fnt";
     public static final String FONT_PNG = "font.png";
-    public static final String COIN = "coin";
+
     public static final String gameover_background = "gameover_background";
+    public static final String EXPLOTION = "explotion";
+
+
 
 
     /*-----IDENTIFICADORES----------*/
