@@ -1,5 +1,7 @@
 # GeometryDash
 
+TODOS LOS SALTOS SON POSIBLES....aunque viendo como jugabas al flappy bird..espero que superes la primera vuelta
+
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
 
 This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
