@@ -15,8 +15,6 @@ import com.mygame.geometrydash.extra.Utils;
 
 public class Spikes  extends Actor {
 
-
-
     private TextureRegion obstaculo;
     private Body bodyObs;
     private Fixture fixtureObs;
@@ -32,14 +30,13 @@ public class Spikes  extends Actor {
 
     private void createBodyObst(float x, float y) {
         BodyDef def = new BodyDef();
-        def.position.set(new Vector2(x,y-.04f));
+        def.position.set(new Vector2(x,y));
         def.type = BodyDef.BodyType.KinematicBody;
         bodyObs = world.createBody(def);
 
-
         bodyObs.setLinearVelocity(Obstaculo.SPEED,0);
 
-
+        //VECTORES DEL PINCHO
         PolygonShape box = new PolygonShape();
         Vector2[] vertices = new Vector2[3];
         vertices[0] = new Vector2(-0.16f,-0.16f);

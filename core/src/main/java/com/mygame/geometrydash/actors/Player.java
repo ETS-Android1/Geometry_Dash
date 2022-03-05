@@ -18,7 +18,7 @@ public class Player extends Actor{
 
     public static final int STATE_NORMAL = 0;
     public static final int STATE_DEAD = 1;
-    public static  float JUMP_SPEED = 3.9f;
+    public static  float JUMP_SPEED = 3.95f; //impulso vertical del personaje
 
     public int state;
 
@@ -27,6 +27,7 @@ public class Player extends Actor{
     private World world;
     private Body body;
     private Fixture fixture;
+    public boolean canJump=false;
 
     public Player(World world, TextureRegion player, Vector2 position){
         this.world = world;
@@ -40,17 +41,17 @@ public class Player extends Actor{
     private void createPlayer() {
         BodyDef bd = new BodyDef();
         bd.position.set(position);
-        bd.type = BodyDef.BodyType.DynamicBody;
+        bd.type = BodyDef.BodyType.DynamicBody; //dinamico porque le va a afectar la fisica
         this.body = this.world.createBody(bd);
         //this.body.setBullet(true);
 
         this.body.setFixedRotation(true); //para que no pueda girar el cuerpo fisico y se quede estatico
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.2f,0.2f);
+        shape.setAsBox(0.25f,0.25f);//el personaje medirá, contando desde la mitad del cuadrado, .2 de alto y ancho
 
         this.fixture = this.body.createFixture(shape,9);
-        this.fixture.setUserData(Utils.USER_PLAYER);
+        this.fixture.setUserData(Utils.USER_PLAYER); //identificador
 
         this.fixture.setFriction(0f); //para que cuando salte encima de un obstaculo no frene por la friccion
         shape.dispose();
@@ -61,19 +62,20 @@ public class Player extends Actor{
     public void act(float delta) {
         boolean jump = Gdx.input.justTouched();
 
-        if (jump && state == STATE_NORMAL) {
+        //comprobar si el personaje puede saltar o no (cuando esté en el aire no podrá hacerlo)
+        if (jump && canJump && state == STATE_NORMAL) {
             this.body.setLinearVelocity(0, JUMP_SPEED);
         }
-
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition(body.getPosition().x-0.2f, body.getPosition().y-0.2f);
-        batch.draw(this.player,getX(),getY(),.4f,.4f);
+        setPosition(body.getPosition().x-0.25f, body.getPosition().y-0.25f);
+        batch.draw(this.player,getX(),getY(),.42f,.42f);
 
     }
 
+    //eliminar el fixture y el body
     public void detach(){
         this.body.destroyFixture(this.fixture);
         this.world.destroyBody(this.body);
@@ -84,10 +86,7 @@ public class Player extends Actor{
 
     }
 
-    //public boolean velocity(){
-       // return  this.body.getLinearVelocity().y == 0;
-   // }
-
+    //para saber si se ha salido de la pantalla
     public boolean isOutOfScreen(){
         return this.body.getPosition().x <=-.6f;
     }

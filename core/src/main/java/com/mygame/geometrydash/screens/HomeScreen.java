@@ -22,10 +22,11 @@ public class HomeScreen extends BaseScreen{
     public HomeScreen(MainGame mainGame) {
         super(mainGame);
 
-        this.stage = new Stage(new StretchViewport(WIDTH_SCREEN-20f,HEIGHT_SCREEN-10f));
-       this.cam = new OrthographicCamera(WIDTH_SCREEN,HEIGHT_SCREEN);
-       this.cam.position.set(WIDTH_SCREEN/2f, HEIGHT_SCREEN/2f,0);
-       inicio = mainGame.assetManagment.getLevelInicio();
+        this.stage = new Stage(new StretchViewport(WIDTH_SCREEN,HEIGHT_SCREEN));
+        this.cam = new OrthographicCamera(WIDTH_SCREEN,HEIGHT_SCREEN);
+        this.cam.position.set(WIDTH_SCREEN/2f, HEIGHT_SCREEN/2f,0); //coloco la camara en la mitad de la pantalla
+
+        inicio = mainGame.assetManagment.getLevelInicio();
 
 
     }
@@ -39,6 +40,7 @@ public class HomeScreen extends BaseScreen{
         background = new Image(main.assetManagment.getBackground());
         background.setPosition( 0, 0);
 
+        //las medidas con strecthViewport se ponen en pixeles
         geometrydash_home = new Image(main.assetManagment.getPantallaInicio());
         geometrydash_home.setPosition(WIDTH_SCREEN/2-geometrydash_home.getWidth()/2,280);
 
@@ -66,8 +68,9 @@ public class HomeScreen extends BaseScreen{
         this.stage.act();
         this.stage.draw();
 
+        //cuando el usuraio toca la pantalla:
         if (Gdx.input.justTouched()) {
-            inicio.play();
+            inicio.play(); //suena el sonido de iniciar nivel
 
             this.stage.addAction(
                     Actions.sequence(
@@ -75,9 +78,11 @@ public class HomeScreen extends BaseScreen{
                             Actions.run(new Runnable() {
                                 @Override
                                 public void run() {
+                                    //elimino las fotos
                                     background.remove();
                                     geometrydash_home.remove();
                                     button_play.remove();
+                                    //lanzo el gamescreen
                                     main.setScreen(new GameScreen(main));
                                 }
                             })

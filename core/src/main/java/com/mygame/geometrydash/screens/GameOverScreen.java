@@ -37,7 +37,7 @@ public class GameOverScreen extends BaseScreen {
         assets = new AssetManagment();
         this.stage = new Stage(new StretchViewport(WIDTH_SCREEN,HEIGHT_SCREEN));
         this.cam = new OrthographicCamera(WIDTH_SCREEN,HEIGHT_SCREEN);
-        this.cam.position.set(WIDTH_SCREEN/2f, HEIGHT_SCREEN/2f,0);
+        this.cam.position.set(WIDTH_SCREEN/2f, HEIGHT_SCREEN/2f,0); //coloco la camara en mitad de la pantalla
 
         inicio = mainGame.assetManagment.getLevelInicio();
 
@@ -45,9 +45,9 @@ public class GameOverScreen extends BaseScreen {
 
     @Override
     public void show() {
-
+        //cargo las imagenes de la animaccion y las introduzco en el array e indico la duracion de la animacion(frame_time)
         animation = new Animation<TextureRegion>(FRAME_TIME, assets.textureAtltas.findRegions("gameover"));
-        animation.setFrameDuration(FRAME_TIME);
+        //animation.setFrameDuration(FRAME_TIME);
         spriteBatch = new SpriteBatch();
 
         drawBackgorund();
@@ -72,7 +72,7 @@ public class GameOverScreen extends BaseScreen {
         deltaTime += Gdx.graphics.getDeltaTime();
         TextureRegion frame = animation.getKeyFrame(deltaTime,true);
 
-        //drawBackgorund(delta);
+        //posiciom y tamaño de la animacion
         spriteBatch.draw(frame,(WIDTH_SCREEN/2.6f),HEIGHT_SCREEN/2.4f,frame.getRegionWidth()/1.1f, frame.getRegionHeight()/1.1f);
 
         spriteBatch.end();
@@ -104,7 +104,6 @@ public class GameOverScreen extends BaseScreen {
 
     @Override
     public void hide() {
-        //this.animation.setFrameDuration(0f);
     }
 
 

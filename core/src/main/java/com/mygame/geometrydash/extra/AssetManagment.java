@@ -4,7 +4,6 @@ import static com.mygame.geometrydash.extra.Utils.ATLAS_MAP;
 import static com.mygame.geometrydash.extra.Utils.BACKGROUND;
 import static com.mygame.geometrydash.extra.Utils.BGMUSIC;
 
-import static com.mygame.geometrydash.extra.Utils.COIN;
 import static com.mygame.geometrydash.extra.Utils.DEATH_SOUND;
 import static com.mygame.geometrydash.extra.Utils.FONT_FNT;
 import static com.mygame.geometrydash.extra.Utils.FONT_PNG;
@@ -24,7 +23,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -38,6 +36,7 @@ public class AssetManagment {
     public AssetManagment(){
         this.assetManager = new AssetManager();
 
+        //CARGO EL ATLAS, LOS SONIDOS Y LA MUSICA
         assetManager.load(ATLAS_MAP, TextureAtlas.class);
         assetManager.load(BGMUSIC, Music.class);
 
@@ -52,6 +51,7 @@ public class AssetManagment {
 
     }
 
+    //TODAS LAS TEXTUREREGIONS QUE VOY A NECESITAR, JUNTO LOS SONIDOS, LA MUSICA Y LA FUENTE DE LETRA
     public TextureRegion getBackground (){
         return this.textureAtltas.findRegion(BACKGROUND);
     }
@@ -74,20 +74,13 @@ public class AssetManagment {
 
     public Music getBGMUSIC(){return this.assetManager.get(BGMUSIC);}
 
-
-
     public Sound getDeathSound(){return this.assetManager.get(DEATH_SOUND);}
 
     public Sound getLevelInicio(){return this.assetManager.get(INICIO_SOUND);}
 
     public TextureRegion getSpike(){return this.textureAtltas.findRegion(PINCHO);}
 
-
-    public TextureRegion getCoin(){return this.textureAtltas.findRegion(COIN);}
     public TextureRegion getGameOverBackground(){return this.textureAtltas.findRegion(gameover_background);}
-
-
-
 
 
     public BitmapFont getFont(){

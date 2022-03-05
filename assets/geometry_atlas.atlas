@@ -1,6 +1,6 @@
 
 geometry_atlas.png
-size: 1582, 1280
+size: 1620, 1280
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
@@ -13,35 +13,35 @@ background_gd
   index: -1
 btnStart
   rotate: false
-  xy: 844, 12
+  xy: 1071, 12
   size: 200, 92
   orig: 200, 92
   offset: 0, 0
   index: -1
 coin
   rotate: false
-  xy: 1276, 59
+  xy: 1537, 559
   size: 70, 45
   orig: 70, 45
   offset: 0, 0
   index: -1
 coin2
   rotate: false
-  xy: 1254, 9
+  xy: 1537, 606
   size: 75, 48
   orig: 75, 48
   offset: 0, 0
   index: -1
 coin3
   rotate: false
-  xy: 1174, 19
+  xy: 1537, 656
   size: 78, 50
   orig: 78, 50
   offset: 0, 0
   index: -1
 cube2
   rotate: false
-  xy: 1458, 445
+  xy: 1537, 792
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
@@ -55,21 +55,21 @@ gameover
   index: -1
 gameover
   rotate: false
-  xy: 844, 106
-  size: 250, 139
-  orig: 250, 139
-  offset: 0, 0
-  index: -1
-gameover
-  rotate: false
-  xy: 1096, 106
-  size: 250, 139
-  orig: 250, 139
-  offset: 0, 0
-  index: -1
-gameover
-  rotate: false
   xy: 1206, 388
+  size: 250, 139
+  orig: 250, 139
+  offset: 0, 0
+  index: -1
+gameover
+  rotate: false
+  xy: 1323, 106
+  size: 250, 139
+  orig: 250, 139
+  offset: 0, 0
+  index: -1
+gameover
+  rotate: false
+  xy: 1071, 106
   size: 250, 139
   orig: 250, 139
   offset: 0, 0
@@ -90,28 +90,28 @@ inicio_screen
   index: -1
 obs1
   rotate: false
-  xy: 1348, 53
+  xy: 1537, 708
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
   index: -1
 obs2
   rotate: false
-  xy: 1498, 283
+  xy: 1537, 876
   size: 81, 160
   orig: 81, 160
   offset: 0, 0
   index: -1
 obs3
   rotate: false
-  xy: 1500, 41
+  xy: 1537, 1038
   size: 80, 240
   orig: 80, 240
   offset: 0, 0
   index: -1
 obs3blocs
   rotate: false
-  xy: 1046, 71
+  xy: 1273, 71
   size: 228, 33
   orig: 228, 33
   offset: 0, 0
@@ -125,14 +125,21 @@ obs_bloque
   index: -1
 pincho
   rotate: false
-  xy: 1348, 137
+  xy: 1458, 419
   size: 150, 108
   orig: 150, 108
   offset: 0, 0
   index: -1
+player
+  rotate: false
+  xy: 844, 20
+  size: 225, 225
+  orig: 225, 225
+  offset: 0, 0
+  index: -1
 suelo_trampa
   rotate: false
-  xy: 1046, 29
+  xy: 1273, 29
   size: 126, 40
   orig: 126, 40
   offset: 0, 0

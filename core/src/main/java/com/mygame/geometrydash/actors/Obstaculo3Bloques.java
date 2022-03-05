@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Obstaculo3Bloques extends Actor{
 
+    //ancho y alto del bloque que es mas ancho
     private static final float OBS_WIDTH = 1.5f;
     private static final float OBS_HEIGHT = .2f;
     private TextureRegion obstaculo;
@@ -36,7 +37,7 @@ public class Obstaculo3Bloques extends Actor{
         def.position.set(position);
         def.type = BodyDef.BodyType.KinematicBody;
         bodyObs = world.createBody(def);
-        bodyObs.setUserData(USER_BLOQUE);
+
         bodyObs.setLinearVelocity(Obstaculo.SPEED,0);
     }
 
@@ -45,6 +46,7 @@ public class Obstaculo3Bloques extends Actor{
         PolygonShape box = new PolygonShape();
         box.setAsBox(OBS_WIDTH/2,OBS_HEIGHT/2);
         this.fixtureObs = bodyObs.createFixture(box,9);
+        this.fixtureObs.setUserData(USER_BLOQUE);
 
     }
 
@@ -60,21 +62,26 @@ public class Obstaculo3Bloques extends Actor{
                 ,OBS_WIDTH,OBS_HEIGHT);
 
     }
+
+    //eliminar el fixture y el body
     public void detach(){
         bodyObs.destroyFixture(fixtureObs);
         world.destroyBody(bodyObs);
 
     }
 
+    //parar los obstaculos
     public void stopObs(){
         this.bodyObs.setLinearVelocity(0,0);
 
     }
 
+    //obtener la posicion en x
     public float getPosition(){
         return this.bodyObs.getPosition().x;
     }
 
+    //para saber si se ha salido de la pantalla
     public boolean isOutOfScreen(){
         return this.bodyObs.getPosition().x <= -1.6f;
     }

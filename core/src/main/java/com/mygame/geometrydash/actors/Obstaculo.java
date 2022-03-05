@@ -1,6 +1,6 @@
 package com.mygame.geometrydash.actors;
 
-import static com.mygame.geometrydash.extra.Utils.USER_OBS1;
+import static com.mygame.geometrydash.extra.Utils.USER_BLOQUE;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,9 +13,13 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Obstaculo  extends Actor {
+    //ancho y alto de los obstaculos de un bloque
+
+    //TODOS LOS OBSTACULOS SON KYNEMATIC PORQUE SE VAN A MOVER Y NO LES AFECTA LA FISICA
     public static final float OBS_WIDTH = .5f;
     public static final float OBS_HEIGHT = .5f;
-    private static final float SPACE_BETWEEN_PIPES = 2f;
+
+    //velocidad en x de todos los obstaculos (se mueven hacia la izquierda)
     public static  float SPEED = -2.2f;
 
     private TextureRegion obstaculo;
@@ -38,7 +42,7 @@ public class Obstaculo  extends Actor {
         def.position.set(position);
         def.type = BodyDef.BodyType.KinematicBody;
         bodyObs = world.createBody(def);
-        bodyObs.setUserData(USER_OBS1);
+
         bodyObs.setLinearVelocity(SPEED,0);
 
     }
@@ -48,7 +52,7 @@ public class Obstaculo  extends Actor {
         PolygonShape box = new PolygonShape();
         box.setAsBox(OBS_WIDTH/2,OBS_HEIGHT/2);
         this.fixtureObs = bodyObs.createFixture(box,9);
-        this.fixtureObs.setFriction(10f);
+        this.fixtureObs.setUserData(USER_BLOQUE);
         box.dispose();
 
 
@@ -67,19 +71,27 @@ public class Obstaculo  extends Actor {
 
     }
 
+
+    //metodo para destuir el fixture y el body
     public void detach(){
         bodyObs.destroyFixture(fixtureObs);
         world.destroyBody(bodyObs);
 
     }
+
+    //metodo para parar los obstaculos una vez salga de la pantalla
     public void stopObs(){
         bodyObs.setLinearVelocity(0,0);
 
     }
 
+    //metodo para obtener su posicion en x
+
     public float getPosition(){
         return this.bodyObs.getPosition().x;
     }
+
+    //metodo para saber si se ha salido de la pantalla
 
     public boolean isOutOfScreen(){
         return this.bodyObs.getPosition().x <= -.8f;

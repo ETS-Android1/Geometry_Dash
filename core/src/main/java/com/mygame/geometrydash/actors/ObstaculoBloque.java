@@ -1,6 +1,8 @@
 package com.mygame.geometrydash.actors;
 
 import static com.mygame.geometrydash.extra.Utils.USER_BLOQUE;
+import static com.mygame.geometrydash.extra.Utils.USER_PINCHO;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -35,7 +37,7 @@ public class ObstaculoBloque extends Actor{
         def.position.set(position);
         def.type = BodyDef.BodyType.KinematicBody;
         bodyObs = world.createBody(def);
-        bodyObs.setUserData(USER_BLOQUE);
+
         bodyObs.setLinearVelocity(Obstaculo.SPEED,0);
     }
 
@@ -44,6 +46,7 @@ public class ObstaculoBloque extends Actor{
         PolygonShape box = new PolygonShape();
         box.setAsBox(OBS_WIDTH/2,OBS_HEIGHT/2);
         this.fixtureObs = bodyObs.createFixture(box,9);
+        this.fixtureObs.setUserData(USER_BLOQUE);
 
     }
 
