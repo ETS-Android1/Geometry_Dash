@@ -13,11 +13,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.mygame.geometrydash.extra.Utils;
-
-import java.util.concurrent.TimeUnit;
 
 public class Player extends Actor{
 
@@ -84,6 +80,7 @@ public class Player extends Actor{
 
         if(state == STATE_DEAD){
             this.body.setLinearVelocity(0,0);
+
             //CUANDO MUERE EL PERSONAJE POR COLISIONAR, MUESTRO UNA ANIMACION
             stateTime += Gdx.graphics.getDeltaTime();
             setPosition(body.getPosition().x-0.65f, body.getPosition().y-.35f);
@@ -104,6 +101,7 @@ public class Player extends Actor{
 
     }
 
+    //cuando el personaje muere por colision le paso la animacion de una explossion
     public void setAnimation(Animation<TextureRegion> animation){
         this.animation = animation;
 
