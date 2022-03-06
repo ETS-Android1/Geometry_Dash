@@ -83,6 +83,7 @@ public class Player extends Actor{
         batch.draw(this.player,getX(),getY(),.42f,.42f);
 
         if(state == STATE_DEAD){
+            this.body.setLinearVelocity(0,0);
             //CUANDO MUERE EL PERSONAJE POR COLISIONAR, MUESTRO UNA ANIMACION
             stateTime += Gdx.graphics.getDeltaTime();
             setPosition(body.getPosition().x-0.65f, body.getPosition().y-.35f);
@@ -107,8 +108,6 @@ public class Player extends Actor{
         this.animation = animation;
 
     }
-
-
 
     //para saber si se ha salido de la pantalla
     public boolean isOutOfScreen(){
