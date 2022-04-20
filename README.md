@@ -1,6 +1,6 @@
 # GeometryDash
 
-TODOS LOS SALTOS SON POSIBLES....aunque viendo como jugabas al flappy bird..espero que superes la primera vuelta
+TODOS LOS SALTOS SON POSIBLES....animo!!
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
 
